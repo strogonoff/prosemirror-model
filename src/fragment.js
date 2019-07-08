@@ -254,7 +254,7 @@ export class Fragment {
   // fragment, the fragment itself. For a node or array of nodes, a
   // fragment containing those nodes.
   static from(nodes) {
-    if (!nodes) return Fragment.empty
+    if (!nodes || nodes.size < 1) return Fragment.empty
     if (nodes instanceof Fragment) return nodes
     if (Array.isArray(nodes)) return this.fromArray(nodes)
     if (nodes.attrs) return new Fragment([nodes], nodes.nodeSize)
