@@ -257,7 +257,7 @@ export class Fragment {
     if (!nodes || nodes.size < 1) return Fragment.empty
     if (nodes instanceof Fragment) return nodes
     if (Array.isArray(nodes)) return this.fromArray(nodes)
-    if (nodes.attrs) return new Fragment([nodes], nodes.nodeSize || nodes.size)
+    if (nodes.attrs) return new Fragment([nodes], nodes.nodeSize)
     throw new RangeError("Can not convert " + nodes + " to a Fragment" +
                          (nodes.nodesBetween ? " (looks like multiple versions of prosemirror-model were loaded)" : ""))
   }
