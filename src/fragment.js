@@ -258,6 +258,13 @@ export class Fragment {
     if (nodes instanceof Fragment) return nodes
     if (Array.isArray(nodes)) return this.fromArray(nodes)
     if (nodes.attrs) return new Fragment([nodes], nodes.nodeSize)
+
+    // Last try:
+    // a weird case with prosemirror-tables where `nodes` is seemingly a Fragment,
+    // but doesn’t pass instanceof test and has a node array under `content`.
+    // Possibly a version conflict somewhere.
+    if (Array.isArray(nodes.content)) return this.fromArray(nodes.content)
+
     throw new RangeError("Can not convert " + nodes + " to a Fragment" +
                          (nodes.nodesBetween ? " (looks like multiple versions of prosemirror-model were loaded)" : ""))
   }
